@@ -20,22 +20,29 @@ class cambiar extends CI_Controller
 
     public function cambiarpassword()
     {
-        $data = array(
-            'nombre_usuario' => $this->input->post()['nombre_usuario'],
-            'password_usuario' => $this->input->post()['password_usuario'],
-            'nuevo_password' => $this->input->post()['nuevo_password']
-        );
-        $this->load->model('usuario');
-        $respuesta = $this->usuario->loginUsuario($data);
-        
-        if($respuesta == true)
+        if($this->input->post() != null)
         {
-            $this->usuario->cambiarPassword($data);
-            echo 'cambio de contraseña exitoso';
+            $data = array(
+                'nombre_usuario' => $this->input->post()['nombre_usuario'],
+                'password_usuario' => $this->input->post()['password_usuario'],
+                'nuevo_password' => $this->input->post()['nuevo_password']
+            );
+            $this->load->model('usuario');
+            $respuesta = $this->usuario->loginUsuario($data);
+            
+            if($respuesta == true)
+            {
+                $this->usuario->cambiarPassword($data);
+                echo 'cambio de contraseña exitoso';
+            }
+            else
+            {
+                echo 'mala contraseña';
+            }
         }
         else
         {
-            echo 'mala contraseña';
+            header('Location: http://localhost/Proyecto/index.php/welcome');
         }
     }
 }

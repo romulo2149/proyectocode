@@ -43,7 +43,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </header>
     <div class="sidenav">
     <?php if(isset($_SESSION['usuario'])){ ?>
-		<a class="nav-link text-uppercase" href="login">Cambiar Password</a>
+        <a class="nav-link text-uppercase" href="login">Cambiar Password</a>
+        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/calendario">ver recorridos</a>
 		<a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
 	<?php } ?>
 	</div>
