@@ -56,7 +56,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div class="main">
-		<p><?php  if(isset($info)){ echo $info['mensaje'];} ?></p>
+    <div class="container">
+    <?php
+                $url = "";
+                for($i = 0; $i<count($lista); $i++)
+                {
+                    $url = $url.$lista[$i]->Latitude.",".$lista[$i]->Longitude."/";
+                }
+                echo "<form action='https://www.google.com/maps/dir/".$url."'>
+                        <input type='submit' class='btn btn-default' value='Ver recorrido'/>
+                        </form>";
+            ?>
+    </div>
+    <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <br>
+                    <br>
+                    <table class="table">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col">Hora</th>
+                                <th scope="col">Ver Mapa</th>
+                                <th scope="col">Latitud</th>
+                                <th scope="col">Longitud</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                                $url = "";
+                                for($i = 0; $i<count($lista); $i++)
+                                {
+                                    echo "<tr>";
+                                    echo "<th scope='row'>".$lista[$i]->DateTime_GPS."</th>";
+                                    echo "<td><a class='btn btn-danger' style='color:white;' href='https://www.google.com/maps/search/?api=1&query=".$lista[$i]->Latitude.",".$lista[$i]->Longitude."'> Ver Mapa </a> </td>";
+                                    echo "<td>".$lista[$i]->Latitude."</td>";
+                                    echo "<td>".$lista[$i]->Longitude."</td>";
+                                    echo "</tr>";
+                                    $url = $url.$lista[$i]->Latitude.",".$lista[$i]->Longitude."/";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
 	</div>
 
 
