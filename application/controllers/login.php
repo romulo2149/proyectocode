@@ -2,22 +2,19 @@
 
 defined('BASEPATH') OR Exit('No direct script access allowed');
 
-class registro extends CI_Controller
+class login extends CI_Controller
 {
 
     public function index()
     {
-        $this->load->view('registro');
+        $this->load->view('login');
     }
 
     public function registrar()
     {
-        if($this->input->post()['password_usuario'] == $this->input->post()['confirma_password'])
-        {
             $data = array(
                 'nombre_usuario' => $this->input->post()['nombre_usuario'],
-                'password_usuario' => $this->input->post()['password_usuario'],
-                'fecha_creacion' => date('Y-m-d H:i:s')
+                'password_usuario' => $this->input->post()['password_usuario']
             );
             $this->load->model('usuario');
             $respuesta = $this->usuario->registrarUsuario($data);
@@ -34,12 +31,6 @@ class registro extends CI_Controller
             {
                 echo 'nombre de usuario duplicado';
             }
-            
-        }
-        else
-        {
-            echo 'Los passwords no coinciden';
-        }
     }
 }
 
