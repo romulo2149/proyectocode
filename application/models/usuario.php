@@ -43,6 +43,13 @@ class usuario extends CI_Model
             return false;
         }
     }
+
+    public function cambiarPassword($data)
+    {
+        $this->db->set('password_usuario', $data['nuevo_password']);
+        $this->db->where('nombre_usuario', $data['nombre_usuario']);
+        $this->db->update('usuarios');
+    }
 }
 
 ?>

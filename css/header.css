@@ -1,0 +1,33 @@
+header .main-nav{
+	position: fixed;
+	top: 0;
+	left: 10;
+	width: 100%;
+    z-index: 4000;
+    height: 100px;
+    background-color: #b71c1c;
+}
+header .main-nav-scrolled{
+	background-color: white;
+}
+.navbar-light .navbar-nav .nav-link{
+	color: #fff;
+}
+.navbar-light .navbar-nav .active .nav-link{
+	color: #00e0d0;
+}
+
+/*for test*/
+body{
+  height: 450px;
+}
+
+.saturate { filter: saturate(3); }
+.grayscale { filter: grayscale(100%); }
+.contrast { filter: contrast(160%); }
+.brightness { filter: brightness(0.25); }
+.blur { filter: blur(3px); }
+.invert { filter: invert(100%); }
+.sepia { filter: sepia(100%); }
+.huerotate { filter: hue-rotate(180deg); }
+.rss.opacity { filter: opacity(50%); }

@@ -7,8 +7,17 @@ class registro extends CI_Controller
 
     public function index()
     {
-        $this->load->view('registro');
+        session_start();
+        if(isset($_SESSION['usuario']))
+        {
+            $this->load->view('welcome_message');
+        }
+        else
+        {
+            $this->load->view('registro');
+        }
     }
+
 
     public function registrar()
     {
@@ -21,24 +30,30 @@ class registro extends CI_Controller
             );
             $this->load->model('usuario');
             $respuesta = $this->usuario->registrarUsuario($data);
-            
             if($respuesta == true)
             {
                 session_start();
                 $_SESSION['usuario'] = $this->input->post()['nombre_usuario'];
-                echo 'sesión iniciada con exito';
-                echo '<br>';
-                echo $_SESSION['usuario'];
+                $info = array(
+                    "mensaje" => "Sesión iniciada con éxito"
+                );
+                $this->load->view('welcome_message', $info);
             }
             else
             {
-                echo 'nombre de usuario duplicado';
+                $info = array(
+                    "mensaje" => "Nombre de usuario duplicado"
+                );
+                $this->load->view('welcome_message', $info);
             }
             
         }
         else
         {
-            echo 'Los passwords no coinciden';
+            $info = array(
+                "mensaje" => "Las contraseñas no coinciden"
+            );
+            $this->load->view('welcome_message', $info);
         }
     }
 }
