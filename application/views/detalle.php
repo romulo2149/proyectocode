@@ -6,7 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -51,26 +50,75 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php if(isset($_SESSION['usuario'])){ ?>
     <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
     <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
-		<a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
+        <a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Volver</a>
 	<?php } ?>
 	</div>
 
 	<div class="main">
     <div class="container">
-    <?php
-                $url = "";
-                for($i = 0; $i<count($lista); $i++)
-                {
-                    $url = $url.$lista[$i]->Latitude.",".$lista[$i]->Longitude."/";
-                }
-                echo "<form action='https://www.google.com/maps/dir/".$url."'>
-                        <input type='submit' class='btn btn-default' value='Ver recorrido'/>
-                        </form>";
-            ?>
     </div>
     <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
+                    <br>
+                    <br>
+                    <table class="table">
+                        <thead class="thead-dark text-center">
+                            <tr>
+                                <th scope="col">FECHA</th>
+                                <th scope="col">Km's reccorridos</th>
+                                <th scope="col">Recorrido</th>
+                                <th scope="col">Mapeable</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td><?php  echo $this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5); ?></td>
+                                <td><?php  $kms = 0;
+                                         for($i = 0; $i<count($km); $i++) 
+                                         {
+                                            $kms = $kms + $km[$i]->total;
+                                         }
+                                         echo $kms;
+                                    ?>
+                                </td>
+                                <td> <?php
+                                        $url = "";
+                                        for($i = 0; $i<count($lista); $i++)
+                                        {
+                                            $url = $url.$lista[$i]->Latitude.",".$lista[$i]->Longitude."/";
+                                        }
+                                        echo "<a class='nav-link' style='color: red;' href='http://localhost/Proyecto/index.php/mapa/recorrido/".$url."'>Ver Recorrido</a>";
+                                        
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        if(count($lista) > 20)
+                                        {
+                                            echo "NO";
+                                        }
+                                        else{
+                                            echo "SI";
+                                        }
+                                    ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <br>
                     <br>
                     <table class="table">
@@ -89,7 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 {
                                     echo "<tr>";
                                     echo "<th scope='row'>".$lista[$i]->DateTime_GPS."</th>";
-                                    echo "<td><a class='btn btn-danger' style='color:white;' href='https://www.google.com/maps/search/?api=1&query=".$lista[$i]->Latitude.",".$lista[$i]->Longitude."'> Ver Mapa </a> </td>";
+                                    echo "<td><a class='btn btn-danger' style='color:white;' href='http://localhost/Proyecto/index.php/mapa/punto/".$lista[$i]->Latitude.",".$lista[$i]->Longitude."'> Ver Mapa </a> </td>";
                                     echo "<td>".$lista[$i]->Latitude."</td>";
                                     echo "<td>".$lista[$i]->Longitude."</td>";
                                     echo "</tr>";

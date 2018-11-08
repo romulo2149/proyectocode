@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-
+    <?php echo $map['js']; ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -49,8 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </header>
     <div class="sidenav">
 	<?php if(isset($_SESSION['usuario'])){ ?>
-        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
-        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
+    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
+    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
         <a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
         <br>
         <br>
@@ -69,9 +69,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div class="main">
-        <?php   
-            echo $cal;
-        ?>
+        <?php echo $map['html']; ?></body>
+        <div class="directionsDiv"></div>
+        
 	</div>
 
 

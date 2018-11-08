@@ -51,7 +51,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php if(isset($_SESSION['usuario'])){ ?>
     <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
     <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
-		<a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
+    <a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
+    <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="javascript:history.go(-1)" title="Return to the previous page">&laquo; Volver</a>
 	<?php } ?>
 	</div>
 
