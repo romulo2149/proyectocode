@@ -6,7 +6,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -14,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Simple Sidebar - Start Bootstrap Template</title>
     <link href="http://localhost/Proyecto/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="http://localhost/Proyecto/css/sidenav.css" rel="stylesheet">
-	<link href="http://localhost/Proyecto/css/header.css" rel="stylesheet">
+    <link href="http://localhost/Proyecto/css/header.css" rel="stylesheet">
+    <link href="http://localhost/Proyecto/css/comentarios.css" rel="stylesheet">
 
 
 </head>
@@ -23,14 +23,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<header>
        <nav class="navbar navbar-expand-lg navbar-light text-light py-3 main-nav">
           <div class="container" style="position: left;">
-            <a class="navbar-brand" href="http://localhost/Proyecto/index.php/login"><img src="http://localhost/Proyecto/img/logo.png" class="invert" height="80" width="80" alt="Logo"></a>
+            <a class="navbar-brand" href="http://localhost/Proyecto/index.php/welcome"><img src="http://localhost/Proyecto/img/logo.png" class="invert" height="80" width="80" alt="Logo"></a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
 
               <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                <?php if(isset($_SESSION['usuario'])){ ?>
+				<?php if(isset($_SESSION['usuario'])){ ?>
 				  <li class="nav-item">
                     <a class="nav-link text-uppercase" href="">Hola <?php echo $_SESSION['usuario'] ?></a>
 				  </li>
@@ -48,9 +48,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </nav>
     </header>
     <div class="sidenav">
-    <?php if(isset($_SESSION['usuario'])){ ?>
-        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
-        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
+	<?php if(isset($_SESSION['usuario'])){ ?>
+    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
+    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
         <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/login/salir">Cerrar Sesión</a>
         <br>
         <br>
@@ -69,34 +69,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div class="main">
-        <div class="container" id="content">
-            <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                   
-                    <br>
-                   <b>Cambiar Password:</b> 
-                    <br>
-                    <div style="height: 30px"></div>
-                    <div class="col-md-12">
-                        <form action="cambiar/cambiarpassword" method="post">
-                            <input type="hidden" value="<?php echo $_SESSION['usuario'] ?>" name="nombre_usuario">
-                            <div class="form-group">
-                                <label for="user">Password Actual:</label>
-                                <input type="text" class="form-control" name="password_usuario" placeholder="Usuario">
-                            </div>
-                            <div class="form-group">
-                                <label for="pass">Nuevo Password:</label>
-                                <input type="password" class="form-control" name="nuevo_password" placeholder="Password">
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-default">Registrarse</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
+    <div class="container">
+    </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-sm-8">
+                
             </div>
+            <div class="col-md-2"></div>
+        </div>
+        <br>
+        <br>
+        <div class="text-center"><h2>Comentario:</h2></div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-sm-8">
+                <?php
+                    for($i = 0; $i<count($comentarios);$i++) 
+                    {
+                        echo '<div class="panel panel-white post panel-shadow"><div class="post-heading"><div class="pull-left meta"><div class="title h5">';
+                        echo '<a href="#"><b>'.$comentarios[$i]->usuario.'</b></a> hizo un comentario. </div>';
+                        echo '<div><small>'.$comentarios[$i]->fecha_envio.'</small></div></div></div>';
+                        echo '<div class="post-description"><p>'.$comentarios[$i]->texto.'</p></div></div><br>';
+                    }
+                ?>
+            </div> 
+            <div class="col-md-2"></div>
         </div>
 	</div>
 

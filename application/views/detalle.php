@@ -13,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>Simple Sidebar - Start Bootstrap Template</title>
     <link href="http://localhost/Proyecto/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="http://localhost/Proyecto/css/sidenav.css" rel="stylesheet">
-	<link href="http://localhost/Proyecto/css/header.css" rel="stylesheet">
+    <link href="http://localhost/Proyecto/css/header.css" rel="stylesheet">
+    <link href="http://localhost/Proyecto/css/comentarios.css" rel="stylesheet">
 
 
 </head>
@@ -50,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php if(isset($_SESSION['usuario'])){ ?>
     <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/cambiar">Cambiar Password</a>
     <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
-        <a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
+        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/login/salir">Cerrar Sesión</a>
         <br>
         <br>
         <br>
@@ -79,6 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <thead class="thead-dark text-center">
                             <tr>
                                 <th scope="col">FECHA</th>
+                                <th scope="col">Chofer</th>
                                 <th scope="col">Km's reccorridos</th>
                                 <th scope="col">Recorrido</th>
                                 <th scope="col">Mapeable</th>
@@ -86,13 +88,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </thead>
                         <tbody class="text-center">
                             <tr>
-                                <td><?php  echo $this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5); ?></td>
+                                <td><?php  $date = new DateTime($lista[1]->DateTime_GPS);
+                                echo $date->format('Y-d-m'); ?></td>
                                 <td><?php  $kms = 0;
                                          for($i = 0; $i<count($km); $i++) 
                                          {
                                             $kms = $kms + $km[$i]->total;
                                          }
                                          echo $kms;
+                                    ?>
+                                </td>
+                                <td>
+                                    <?php
+                                        echo $chofer;
                                     ?>
                                 </td>
                                 <td> <?php
@@ -121,6 +129,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </table>
                     <br>
                     <br>
+                    
+                    <a href="http://localhost/Proyecto/index.php/comentarios/nuevo/<?php echo $this->uri->segment(3).'/'.$this->uri->segment(4).'/'.$this->uri->segment(5).'/'.$chofer; ?> ">Añadir Comentario</a>
+
                     <table class="table">
                         <thead class="thead-dark text-center">
                             <tr>
@@ -148,7 +159,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </table>
                 </div>
                 <div class="col-md-2"></div>
-            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+       
 	</div>
 
 

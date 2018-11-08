@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php if(isset($_SESSION['usuario'])){ ?>
         <a class="nav-link text-uppercase" href="login">Cambiar Password</a>
         <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/chofer">ver recorridos</a>
-        <a class="nav-link text-uppercase" href="login/salir">Cerrar Sesión</a>
+        <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/login/salir">Cerrar Sesión</a>
         <br>
         <br>
         <br>
@@ -75,14 +75,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <br>
                     <div style="height: 30px"></div>
                     <div class="col-md-12">
-                        <form action="login/entrar" method="post">
+                        <form action="http://localhost/Proyecto/index.php/login/entrar" method="post">
                             <div class="form-group">
                                 <label for="user">Usuario:</label>
                                 <input type="text" class="form-control" name="nombre_usuario" placeholder="Usuario">
+                                <?php
+                                if(isset($mensajeUser)){
+                                    echo '<small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red">'.$mensajeUser.'</small>';
+                                }else{
+                                // echo '<small id="passwordHelp" class="form-text text-muted">Utiliza mayusculas,minusculas y caracteres alfanumericos para hacer una contraseña mas fuerte.</small>';
+                                }
+                                ?>
                             </div>
                             <div class="form-group">
                                 <label for="pass">Password:</label>
                                 <input type="password" class="form-control" name="password_usuario" placeholder="Password">
+                                <?php
+                                if(isset($mensajePass)){
+                                    echo '<small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red">'.$mensajePass.'</small>';
+                                }else{
+                                // echo '<small id="passwordHelp" class="form-text text-muted">Utiliza mayusculas,minusculas y caracteres alfanumericos para hacer una contraseña mas fuerte.</small>';
+                                }
+                                ?>
                             </div>
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-default">Registrarse</button>

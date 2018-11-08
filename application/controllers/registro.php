@@ -21,41 +21,48 @@ class registro extends CI_Controller
 
     public function registrar()
     {
-        if($this->input->post() != null)
+        session_start();
+        if(isset($_SESSION['usuario']))
         {
-            if($this->input->post()['password_usuario'] == $this->input->post()['confirma_password'])
+            if($this->input->post() != null)
             {
-                $data = array(
-                    'nombre_usuario' => $this->input->post()['nombre_usuario'],
-                    'password_usuario' => $this->input->post()['password_usuario'],
-                    'fecha_creacion' => date('Y-m-d H:i:s')
-                );
-                $this->load->model('usuario');
-                $respuesta = $this->usuario->registrarUsuario($data);
-                if($respuesta == true)
+                if($this->input->post()['password_usuario'] == $this->input->post()['confirma_password'])
                 {
-                    session_start();
-                    $_SESSION['usuario'] = $this->input->post()['nombre_usuario'];
-                    $info = array(
-                        "mensaje" => "Sesión iniciada con éxito"
+                    $data = array(
+                        'nombre_usuario' => $this->input->post()['nombre_usuario'],
+                        'password_usuario' => $this->input->post()['password_usuario'],
+                        'fecha_creacion' => date('Y-m-d H:i:s')
                     );
-                    $this->load->view('welcome_message', $info);
+                    $this->load->model('usuario');
+                    $respuesta = $this->usuario->registrarUsuario($data);
+                    if($respuesta == true)
+                    {
+                        $_SESSION['usuario'] = $this->input->post()['nombre_usuario'];
+                        $info = array(
+                            "mensaje" => "Sesión iniciada con éxito"
+                        );
+                        $this->load->view('welcome_message', $info);
+                    }
+                    else
+                    {
+                        $info = array(
+                            "mensaje" => "Nombre de usuario duplicado"
+                        );
+                        $this->load->view('welcome_message', $info);
+                    }
+                    
                 }
                 else
                 {
                     $info = array(
-                        "mensaje" => "Nombre de usuario duplicado"
+                        "mensaje" => "Las contraseñas no coinciden"
                     );
                     $this->load->view('welcome_message', $info);
                 }
-                
             }
             else
             {
-                $info = array(
-                    "mensaje" => "Las contraseñas no coinciden"
-                );
-                $this->load->view('welcome_message', $info);
+                header('Location: http://localhost/Proyecto/index.php/welcome');
             }
         }
         else
