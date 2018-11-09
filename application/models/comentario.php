@@ -7,7 +7,7 @@ class comentario extends CI_Model
     {
         $this->load->database();
         $query = $this->db->query(
-            "select * from comentarios where comentario = '".$fecha."' AND chofer = '".$chofer."' order by fecha_envio asc"
+            "select * from comentarios where comentario = '".$fecha."' AND chofer = '".$chofer."' order by fecha_envio desc"
         );
         return $query->result();
     }

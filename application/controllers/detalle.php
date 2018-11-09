@@ -18,7 +18,7 @@ class detalle extends CI_Controller
             $data['lista'] = $this->recorridos->getrecorridodia($fecha, str_replace("%20"," ",$chofer));
             $data['km'] = $this->recorridos->kmrecorrido($fecha, str_replace("%20"," ",$chofer));
             $data['chofer'] = str_replace("%20"," ",$chofer);
-            session_start();
+            $data['fecha'] = $fecha->format('Y-d-m');
             $this->load->view('detalle', $data);
         }
         else

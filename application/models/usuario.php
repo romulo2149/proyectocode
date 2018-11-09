@@ -10,6 +10,7 @@ class usuario extends CI_Model
         $this->db->from('usuarios');
         $this->db->where($condition);
         $this->db->limit(1);
+        
         $query = $this->db->get();
         if ($query->num_rows() == 0) 
         {

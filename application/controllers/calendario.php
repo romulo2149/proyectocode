@@ -6,11 +6,11 @@ class calendario extends CI_Controller
 {
     public function index()
     {
+        session_start();
         if(isset($_SESSION['usuario']))
         {
             if($this->input->get() != null)
             {
-                session_start();
                 $chofer = $this->input->get()['nombre_chofer'];
                 if(isset($_SESSION['usuario']))
                 {
@@ -67,7 +67,6 @@ class calendario extends CI_Controller
             }
             else
             {
-                session_start();
                 $this->load->view('chofer');
             }
         }
@@ -127,7 +126,7 @@ class calendario extends CI_Controller
             
             );
             $data = array('cal' => $this->calendar->generate($año, $mes, $datos));
-            session_start();
+         
             $this->load->view('calendario', $data);
         }
         else

@@ -71,10 +71,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="main">
     <div class="container">
     </div>
+    <div class="text-center"><h2>Añadir un comentario:</h2></div>
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-sm-8">
+                <form action="http://localhost/Proyecto/index.php/comentarios/publicar" method="post">
+                    <div class="form-group">
+                        <textarea class="form-control" name="texto" rows="3"></textarea>
+                        <input type="hidden" name="comentario" value="
+                            <?php
+                            if(isset($fecha))
+                            {
+                                echo $fecha;
+                            }
+                            else
+                            {
+                                $año = $this->uri->segment(3);
+                                $mes = $this->uri->segment(4);
+                                $dia = $this->uri->segment(5);
+                                $fecha = "".$año."-".$dia."-".$mes."";
+                                echo $fecha;
+                            }
+                            ?>
+                        "/>
+                        <input type="hidden" name="chofer" value="
+                            <?php
+                            if(isset($chofer))
+                            {
+                                echo $chofer;
+                            }
+                            else
+                            {
+                                $chofer = $this->uri->segment(6);
+                                echo str_replace("%20"," ",$chofer);
+                            }
+                            ?>
+                        "/>
+                    </div>
+                    <input type="submit" class="btn btn-default" value="Enviar Comentario"/>
                 
+                </form>
             </div>
             <div class="col-md-2"></div>
         </div>

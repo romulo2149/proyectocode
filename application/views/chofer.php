@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 
 	<div class="main">
-		<form action="calendario" method="get">
+		<form action="http://localhost/Proyecto/index.php/calendario" method="get">
             <select name="nombre_chofer" id="">
                 <option value="PUE 1 CHOFER">PUE 1 CHOFER</option>
                 <option value="PUE 2 CHOFER">PUE 2 CHOFER</option>

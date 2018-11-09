@@ -88,8 +88,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </thead>
                         <tbody class="text-center">
                             <tr>
-                                <td><?php  $date = new DateTime($lista[1]->DateTime_GPS);
-                                echo $date->format('Y-d-m'); ?></td>
+                                <td><?php  
+                                echo $fecha ?></td>
                                 <td><?php  $kms = 0;
                                          for($i = 0; $i<count($km); $i++) 
                                          {
