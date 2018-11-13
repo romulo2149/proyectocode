@@ -31,10 +31,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="registro">Registrarse</a>
+                    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/registro">Registrarse</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link  text-uppercase" href="login">Iniciar Sesión</a>
+                    <a class="nav-link  text-uppercase" href="http://localhost/Proyecto/index.php/login">Iniciar Sesión</a>
                   </li>
                 </ul>
               </div>
@@ -69,6 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="col-md-4">
                     <div class="col-md-12 text-center">
                         <img src="http://localhost/Proyecto/img/logo.png" alt="">
+                        <?php if(isset($error)){echo $error;} ?>
                     </div>
                     <br>
                    <b>Inicio de sesión:</b> 
@@ -78,25 +79,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <form action="http://localhost/Proyecto/index.php/login/entrar" method="post">
                             <div class="form-group">
                                 <label for="user">Usuario:</label>
-                                <input type="text" class="form-control" name="nombre_usuario" placeholder="Usuario">
-                                <?php
-                                if(isset($mensajeUser)){
-                                    echo '<small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red">'.$mensajeUser.'</small>';
-                                }else{
-                                // echo '<small id="passwordHelp" class="form-text text-muted">Utiliza mayusculas,minusculas y caracteres alfanumericos para hacer una contraseña mas fuerte.</small>';
-                                }
-                                ?>
+                                <input value="<?php echo set_value('nombre_usuario'); ?>" type="text" class="form-control" name="nombre_usuario" placeholder="Usuario">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('nombre_usuario');?></small>
                             </div>
                             <div class="form-group">
                                 <label for="pass">Password:</label>
-                                <input type="password" class="form-control" name="password_usuario" placeholder="Password">
-                                <?php
-                                if(isset($mensajePass)){
-                                    echo '<small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red">'.$mensajePass.'</small>';
-                                }else{
-                                // echo '<small id="passwordHelp" class="form-text text-muted">Utiliza mayusculas,minusculas y caracteres alfanumericos para hacer una contraseña mas fuerte.</small>';
-                                }
-                                ?>
+                                <input value="<?php echo set_value('password_usuario'); ?>" type="password" class="form-control" name="password_usuario" placeholder="Password">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('password_usuario');?></small>
                             </div>
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-default">Registrarse</button>

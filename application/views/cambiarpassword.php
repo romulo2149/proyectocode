@@ -79,15 +79,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <br>
                     <div style="height: 30px"></div>
                     <div class="col-md-12">
-                        <form action="cambiar/cambiarpassword" method="post">
+                        <form action="http://localhost/Proyecto/index.php/cambiar/cambiarpassword" method="post">
                             <input type="hidden" value="<?php echo $_SESSION['usuario'] ?>" name="nombre_usuario">
                             <div class="form-group">
                                 <label for="user">Password Actual:</label>
-                                <input type="text" class="form-control" name="password_usuario" placeholder="Usuario">
+                                <input value="<?php echo set_value('password_usuario'); ?>" type="text" class="form-control" name="password_usuario" placeholder="Usuario">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('password_usuario');?></small>
                             </div>
                             <div class="form-group">
                                 <label for="pass">Nuevo Password:</label>
-                                <input type="password" class="form-control" name="nuevo_password" placeholder="Password">
+                                <input value="<?php echo set_value('nuevo_password'); ?>" type="text" class="form-control" name="nuevo_password" placeholder="Password">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('nuevo_password');?></small>
                             </div>
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-default">Registrarse</button>

@@ -31,10 +31,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="registro">Registrarse</a>
+                    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/registro">Registrarse</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link  text-uppercase" href="login">Iniciar Sesión</a>
+                    <a class="nav-link  text-uppercase" href="http://localhost/Proyecto/index.php/login">Iniciar Sesión</a>
                   </li>
                 </ul>
               </div>
@@ -72,21 +72,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     <br>
                    <b>Registrate con un nombre de usuario y un password:</b> 
+                    
                     <br>
                     <div style="height: 30px"></div>
                     <div class="col-md-12">
-                        <form action="registro/registrar" method="post">
+                        <form action="http://localhost/Proyecto/index.php/registro/registrar" method="post">
                             <div class="form-group">
-                                <label for="user">Usuario:</label>
-                                <input type="text" class="form-control" name="nombre_usuario" placeholder="Usuario">
+                                <label for="user">Usuario <small>(alfanumerico) </small>:</label>
+                                <input value="<?php echo set_value('nombre_usuario'); ?>" type="text" class="form-control" name="nombre_usuario" placeholder="Usuario">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('nombre_usuario');?></small>
                             </div>
                             <div class="form-group">
-                                <label for="pass">Password:</label>
-                                <input type="password" class="form-control" name="password_usuario" placeholder="Password">
+                                <label for="pass">Password <small>(alfanumerico) </small>: </label>
+                                <input value="<?php echo set_value('password_usuario'); ?>" type="password" class="form-control" name="password_usuario" placeholder="Password">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('password_usuario');?></small>
                             </div>
                             <div class="form-group">
                                 <label for="pass">Confirmar Password:</label>
-                                <input type="password" class="form-control" name="confirma_password" placeholder="Confirmar Password">
+                                <input value="<?php echo set_value('nuevo_password'); ?>" type="password" class="form-control" name="confirma_password" placeholder="Confirmar Password">
+                                <small id="corfirmpasswordHelp" class="form-text text-muted" style="color:red"><?php echo form_error('confirma_password');?></small>
                             </div>
                             <div class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-default">Registrarse</button>

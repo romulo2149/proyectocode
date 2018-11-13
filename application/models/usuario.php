@@ -5,41 +5,23 @@ class usuario extends CI_Model
     public function registrarUsuario($data)
     {
         $this->load->database();
-        $condition = "nombre_usuario =" . "'" . $data['nombre_usuario'] . "'";
-        $this->db->select('*');
-        $this->db->from('usuarios');
-        $this->db->where($condition);
-        $this->db->limit(1);
-        
-        $query = $this->db->get();
-        if ($query->num_rows() == 0) 
-        {
-            $this->db->insert('usuarios', $data);
-            if ($this->db->affected_rows() > 0) 
-            {
-                return true;
-            }
-        } 
-        else 
-        {
-            return false;
-        }
+        $this->db->insert('usuarios', $data);
     }
 
-    public function loginUsuario($data)
+    public function loginUsuario($user, $pass)
     {
         $this->load->database();
-        $condition = "nombre_usuario =" . "'" . $data['nombre_usuario'] . "' AND password_usuario = '".$data['password_usuario']."'";
-        $this->db->select('*');
-        $this->db->from('usuarios');
-        $this->db->where($condition);
-        $this->db->limit(1);
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) 
+        $query = $this->db
+            ->select("*")
+            ->from("usuarios")
+            ->where("nombre_usuario", $user)
+            ->get();
+        $row = $query->row();
+        if (password_verify($pass, $row->password_usuario))
         {
             return true;
-        } 
-        else 
+        }
+        else
         {
             return false;
         }
@@ -48,12 +30,7 @@ class usuario extends CI_Model
     public function usuarioExiste($data)
     {
         $this->load->database();
-        $condition = "nombre_usuario =" . "'" . $data['nombre_usuario']."'";
-        $this->db->select('*');
-        $this->db->from('usuarios');
-        $this->db->where($condition);
-        $this->db->limit(1);
-        $query = $this->db->get();
+        $query = $this->db->get_where('usuarios', array('nombre_usuario' => $data), 1);
         if ($query->num_rows() > 0) 
         {
             return true;
@@ -66,10 +43,11 @@ class usuario extends CI_Model
 
     public function cambiarPassword($data)
     {
-        $this->db->set('password_usuario', $data['nuevo_password']);
+        $this->db->set('password_usuario', $data['password_usuario']);
         $this->db->where('nombre_usuario', $data['nombre_usuario']);
         $this->db->update('usuarios');
     }
 }
 
 ?>
+

@@ -36,10 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				  </li>
 				<?php } else{ ?>
                   <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="registro">Registrarse</a>
+                    <a class="nav-link text-uppercase" href="http://localhost/Proyecto/index.php/registro">Registrarse</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link  text-uppercase" href="login">Iniciar Sesión</a>
+                    <a class="nav-link  text-uppercase" href="http://localhost/Proyecto/index.php/login">Iniciar Sesión</a>
 				  </li>
 				  <?php } ?>
                 </ul>

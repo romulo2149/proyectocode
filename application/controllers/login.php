@@ -7,6 +7,7 @@ class login extends CI_Controller
 
     public function index()
     {
+        $this->load->library('form_validation');
         session_start();
         if(isset($_SESSION['usuario']))
         {
@@ -27,41 +28,35 @@ class login extends CI_Controller
         }
         else
         {
-            if($this->input->post() != null)
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('nombre_usuario', 'Username', 'required|alpha_numeric|callback_usuarioEx', 
+                array(
+                    'required' => '<div class="alert alert-warning" role="alert">El nombre no puede estar vacio</div>',
+                    'alpha_numeric' => '<div class="alert alert-warning" role="alert">Solo se permiten caracteres alfanuméricos en el nombre de usuario</div>'
+                ));
+            $this->form_validation->set_rules('password_usuario', 'Password', 'required|alpha_numeric', 
+                array(
+                    'required' => '<div class="alert alert-warning" role="alert">El password no puede estar vacio</div>',
+                    'alpha_numeric' => '<div class="alert alert-warning" role="alert">Los passwords solo contienen caracteres alfanumericos</div>'
+                ));
+            if ($this->form_validation->run() == TRUE)
             {
-                $data = array(
-                    'nombre_usuario' => $this->input->post()['nombre_usuario'],
-                    'password_usuario' => $this->input->post()['password_usuario']
-                );
                 $this->load->model('usuario');
-                $respuesta = $this->usuario->usuarioExiste($data);
-                
-                if($respuesta == true)
+                $response = $this->usuario->loginUsuario($this->input->post()['nombre_usuario'],$this->input->post()['password_usuario']);
+                if($response == true)
                 {
-                    $respuesta = $this->usuario->loginUsuario($data);
-                    if($respuesta == true)
-                    {
-                        $data['mensajeExito'] = 'Logueo exitoso';
-                        $_SESSION['usuario'] = $this->input->post()['nombre_usuario'];
-                        $this->load->view('welcome_message', $data);
-                    }
-                    else
-                    {
-                        $data['mensajePass'] = 'Contraseña Incorrecta';
-                        $this->load->view('login', $data);
-                    }
+                    $_SESSION["usuario"] = $this->input->post()['nombre_usuario'];
+                    $this->load->view('welcome_message');
                 }
-                
                 else
                 {
-                    $data['mensajeUser'] = 'Usuario no existe';
-                    $this->load->view('login', $data);
+                    $data['error'] = "Error desconocido, contacta al administrador";
+                    $this->load->view('welcome_message');
                 }
             }
             else
             {
-                $data['mensajeObligatorio'] = 'Campos Obligatorios';
-                    $this->load->view('login', $data);
+                $this->load->view('login');
             }
         }
     }
@@ -73,7 +68,22 @@ class login extends CI_Controller
         header('Location: http://localhost/Proyecto/index.php/welcome');
         exit();
     }
-    
+
+    public function usuarioEx($str)
+    {
+        $this->load->model('usuario');
+        $res = $this->usuario->usuarioExiste($str);
+        if($res == true)
+        {
+            return true;
+        }
+        else
+        {
+            $this->load->library('form_validation');
+            $this->form_validation->set_message('usuarioEx', '<div class="alert alert-warning" role="alert">Nombre de usuario inexistente</div>');
+            return false;
+        }
+    }
 }
 
 
